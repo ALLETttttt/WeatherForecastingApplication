@@ -28,8 +28,7 @@ class MainActivity : ComponentActivity() {
                     painter = painterResource(id = R.drawable.weather_bg),
                     contentDescription = "bg",
                     modifier = Modifier
-                        .fillMaxSize()
-                        .alpha(0.55f),
+                        .fillMaxSize(),
                     contentScale = ContentScale.FillBounds
                 )
                 Column {
