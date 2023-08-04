@@ -58,7 +58,9 @@ class MainActivity : ComponentActivity() {
                     contentScale = ContentScale.FillBounds
                 )
                 Column {
-                    MainCard(currentDay)
+                    MainCard(currentDay, onClickSync = {
+                        getData("London", this@MainActivity, daysList, currentDay)
+                    })
                     TabLayout(daysList, currentDay)
                 }
             }
@@ -126,7 +128,7 @@ private fun getWeatherByDays(response: String): List<WeatherModel> {
     }
     list[0] = list[0].copy(
         time = mainObject.getJSONObject("current").getString("last_updated"),
-        currentTemp = mainObject.getJSONObject("current").getString("temp_c")
+        currentTemp = mainObject.getJSONObject("current").getString("temp_c").toFloat().toInt().toString() + "°C"
     )
     return list
 }
