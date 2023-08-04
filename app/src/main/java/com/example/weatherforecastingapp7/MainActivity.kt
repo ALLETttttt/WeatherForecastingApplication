@@ -80,7 +80,7 @@ private fun getData(city: String, context: Context,
             "&q=" +
             "$city" +
             "&days=" +
-            "3" +
+            "10" +
             "&aqi=no&alerts=no"
 
     val queue = Volley.newRequestQueue(context)
@@ -128,7 +128,7 @@ private fun getWeatherByDays(response: String): List<WeatherModel> {
     }
     list[0] = list[0].copy(
         time = mainObject.getJSONObject("current").getString("last_updated"),
-        currentTemp = mainObject.getJSONObject("current").getString("temp_c").toFloat().toInt().toString() + "°C"
+        currentTemp = mainObject.getJSONObject("current").getString("temp_c")
     )
     return list
 }

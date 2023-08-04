@@ -115,6 +115,7 @@ fun MainCard(currentDay: MutableState<WeatherModel>, onClickSync: () -> Unit) {
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     IconButton(onClick = {
+
                     }) {
                         Icon(
                             painter = painterResource(id = R.drawable.search),
