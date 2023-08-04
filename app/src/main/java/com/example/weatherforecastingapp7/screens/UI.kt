@@ -1,16 +1,21 @@
 package com.example.weatherforecastingapp7.screens
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -23,11 +28,28 @@ import com.example.weatherforecastingapp7.data.WeatherModel
 import com.example.weatherforecastingapp7.ui.theme.BlueLight
 
 @Composable
-fun UI(item: WeatherModel) {
+fun MainList(list: List<WeatherModel>, currentDays: MutableState<WeatherModel >) {
+    LazyColumn(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        itemsIndexed(
+            list
+        ) { _, item ->
+            UI(item, currentDays)
+        }
+    }
+}
+
+@Composable
+fun UI(item: WeatherModel, currentDays: MutableState<WeatherModel>) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(top = 5.dp),
+            .padding(top = 5.dp)
+            .clickable {
+                if (item.hours.isEmpty()) return@clickable
+                currentDays.value = item
+            },
         colors = CardDefaults.cardColors(BlueLight),
         elevation = CardDefaults.cardElevation(0.dp),
         shape = RoundedCornerShape(13.dp)
@@ -53,7 +75,8 @@ fun UI(item: WeatherModel) {
                 )
             }
             Text(
-                text = item.currentTemp.ifEmpty { "${item.maxTemp}/${item.minTemp}" },
+                text = item.currentTemp.ifEmpty { "${item.maxTemp.toFloat().toInt()}°C/" +
+                        "${item.minTemp.toFloat().toInt()}°C" } ,
                 color = Color.White,
                 style = TextStyle(fontSize = 25.sp)
             )
