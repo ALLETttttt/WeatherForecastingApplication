@@ -52,6 +52,8 @@ android {
 dependencies {
     implementation("com.android.volley:volley:1.2.1")
 
+    implementation("androidx.navigation:navigation-compose:2.4.0-alpha05")
+
     implementation("com.google.accompanist:accompanist-pager:0.19.0")
     implementation("com.google.accompanist:accompanist-pager-indicators:0.19.0")
 
