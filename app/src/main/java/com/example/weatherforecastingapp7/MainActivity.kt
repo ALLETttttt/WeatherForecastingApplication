@@ -21,6 +21,7 @@ import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.weatherforecastingapp7.data.WeatherModel
+import com.example.weatherforecastingapp7.screens.DialogSearch
 import com.example.weatherforecastingapp7.screens.MainCard
 import com.example.weatherforecastingapp7.screens.SplashScreen
 import com.example.weatherforecastingapp7.screens.TabLayout
@@ -61,6 +62,9 @@ private fun Start(context: Context) {
     val daysList = remember {
         mutableStateOf(listOf<WeatherModel>())
     }
+    val dialogState = remember {
+        mutableStateOf(false)
+    }
     val currentDay = remember {
         mutableStateOf(
             WeatherModel(
@@ -75,6 +79,11 @@ private fun Start(context: Context) {
             )
         )
     }
+    if(dialogState.value) {
+        DialogSearch(dialogState, onSubmit = {
+            getData(it, context, daysList, currentDay)
+        })
+    }
     getData("London", context, daysList, currentDay)
     Image(
         painter = painterResource(id = R.drawable.weather_bg),
@@ -86,6 +95,8 @@ private fun Start(context: Context) {
     Column {
         MainCard(currentDay, onClickSync = {
             getData("London", context, daysList, currentDay)
+        }, onClickSearch = {
+            dialogState.value = true
         })
         TabLayout(daysList, currentDay)
     }
