@@ -75,7 +75,8 @@ fun UI(item: WeatherModel, currentDays: MutableState<WeatherModel>) {
                 Text(text = item.time)
                 Text(
                     text = item.condition,
-                    color = Color.White
+                    color = Color.White,
+                    modifier = Modifier.fillMaxWidth(0.3f)
                 )
             }
             Text(
