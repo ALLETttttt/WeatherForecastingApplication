@@ -76,6 +76,7 @@ class MainActivity : ComponentActivity() {
 - Datas coming from this link [Weather API](https://www.weatherapi.com)
 - For realizing the project used: library Volley to fetch API, States to track the data`s condition.
 - Realised Splash Screen
+- Coroutines for animation
 ## Optimizations
 Used
 ``
