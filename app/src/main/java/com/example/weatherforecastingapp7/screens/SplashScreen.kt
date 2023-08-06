@@ -1,7 +1,6 @@
 package com.example.weatherforecastingapp7.screens
 
-import android.content.Context
-import android.content.Intent
+
 import android.view.animation.OvershootInterpolator
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
@@ -15,12 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.core.content.ContextCompat.startActivity
 import androidx.navigation.NavController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import com.example.weatherforecastingapp7.MainActivity
 import com.example.weatherforecastingapp7.R
 import kotlinx.coroutines.delay
 
@@ -43,7 +37,7 @@ fun SplashScreen(navController: NavController ) {
             )
         )
         delay(3000L)
-        navController.navigate("main_screen")
+        navController.navigate("welcome_screen")
     }
 
     Box(

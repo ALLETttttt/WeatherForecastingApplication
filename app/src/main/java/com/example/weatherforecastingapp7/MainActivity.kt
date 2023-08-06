@@ -7,18 +7,13 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -29,6 +24,7 @@ import com.example.weatherforecastingapp7.data.WeatherModel
 import com.example.weatherforecastingapp7.screens.MainCard
 import com.example.weatherforecastingapp7.screens.SplashScreen
 import com.example.weatherforecastingapp7.screens.TabLayout
+import com.example.weatherforecastingapp7.screens.WelcomeScreen
 import com.example.weatherforecastingapp7.ui.theme.WeatherForecastingApp7Theme
 import org.json.JSONObject
 
@@ -47,8 +43,12 @@ class MainActivity : ComponentActivity() {
                         SplashScreen(navController = navController)
                     }
 
+                    composable("welcome_screen") {
+                        WelcomeScreen(navController = navController)
+                    }
+
                     composable("main_screen") {
-                        start(this@MainActivity)
+                        Start(this@MainActivity)
                     }
                 }
             }
@@ -57,7 +57,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-private fun start(context: Context) {
+private fun Start(context: Context) {
     val daysList = remember {
         mutableStateOf(listOf<WeatherModel>())
     }
@@ -99,9 +99,9 @@ private fun getData(
     daysList: MutableState<List<WeatherModel>>, currentDay: MutableState<WeatherModel>
 ) {
     val url = "https://api.weatherapi.com/v1/forecast.json?key=" +
-            "$API_KEY" +
+            API_KEY +
             "&q=" +
-            "$city" +
+            city +
             "&days=" +
             "10" +
             "&aqi=no&alerts=no"
